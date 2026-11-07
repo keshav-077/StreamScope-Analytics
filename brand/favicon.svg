@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>TRACE</title>
+  <style>
+    .ring, .line { stroke: #0B1220; }
+    @media (prefers-color-scheme: dark) {
+      .ring, .line { stroke: #9AA5B4; }
+    }
+  </style>
+  <line class="line" x1="24.95" y1="39.05" x2="37.51" y2="26.49" stroke-width="5" stroke-linecap="round"/>
+  <circle class="ring" cx="20" cy="44" r="7" fill="none" stroke-width="5"/>
+  <circle cx="46" cy="18" r="12" fill="#00AEEF"/>
+</svg>

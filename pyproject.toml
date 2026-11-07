@@ -1,0 +1,51 @@
+[project]
+name = "streamscope-analytics"
+version = "1.0.0"
+description = "StreamScope Analytics: Advanced Multi-Object Tracking & Spatial Intelligence Platform - Engineered by Keshav"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "opencv-python>=4.9",
+    "ultralytics>=8.1",
+    "lap>=0.5.12",
+    "numpy>=1.26",
+    "sqlalchemy>=2.0",
+    "psycopg2-binary>=2.9",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "pydantic>=2.6",
+    # Required for FastAPI's UploadFile/File/Form (POST /videos/upload) --
+    # not a transitive dep of anything else already listed here; omitting it
+    # doesn't fail at install time, only at first multipart request
+    # (RuntimeError: Form data requires "python-multipart" to be installed).
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "httpx>=0.27",
+]
+agent = [
+    "anthropic>=0.40",
+    "openai>=1.0",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# packages.find below only discovers real packages (directories with
+# __init__.py) under src/ -- logging_config.py is a lone top-level module
+# there, so it needs its own py-modules entry or it silently never ends up
+# in the installed distribution (ModuleNotFoundError: No module named
+# 'logging_config' the moment api/app.py imports it), even though `pip
+# install .` succeeds with no error and every package-based import works.
+py-modules = ["logging_config"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
